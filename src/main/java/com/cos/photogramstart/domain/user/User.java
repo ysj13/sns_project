@@ -19,18 +19,30 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(length = 20, unique = true)
     private String username;
 
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String name;
+
     private String website;
+
     private String bio;
+
     private String phone;
+
     private String gender;
+
     private String profileImageUrl;
+
     private String role;
+
     private LocalDateTime createDate;
 
     @PrePersist
