@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 public class SignupDto {
 
     @Max(20)
+    @NotBlank
     private String username;
     @NotBlank
     private String password;
