@@ -12,7 +12,7 @@
 				<div class="sl__item__header">
 					<div>
 						<img class="profile-image" src="#"
-							onerror="this.src='/images/person.jpeg'" />
+							onerror="this.src='/images/person.jpg'" />
 					</div>
 					<div>TherePrograming</div>
 				</div>
