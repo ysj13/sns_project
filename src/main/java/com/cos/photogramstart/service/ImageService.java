@@ -33,8 +33,6 @@ public class ImageService {
         }
 
         Image image = imageUploadDto.toEntity(imageFileName, principalDetails.getUser());
-        Image imageEntity = imageRepository.save(image);
-
-        System.out.println(imageEntity);
+        imageRepository.save(image);
     }
 }
