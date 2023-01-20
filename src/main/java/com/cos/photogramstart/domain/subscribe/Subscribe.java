@@ -30,11 +30,11 @@ public class Subscribe {
 
     @JoinColumn(name = "fromUserId")
     @ManyToOne
-    private User fromUser;  // 구독하는 유저
+    private User fromUser;  // 팔로우하는 유저
 
     @JoinColumn(name = "toUserId")
     @ManyToOne
-    private User toUser;    // 구독받는 유저
+    private User toUser;    // 팔로우받는 유저
 
     private LocalDateTime createDate;
 

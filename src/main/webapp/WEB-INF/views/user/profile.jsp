@@ -23,13 +23,20 @@
 		</div>
 		<!--유저이미지end-->
 
-		<!--유저정보 및 사진등록 구독하기-->
+		<!--유저정보 및 사진등록 팔로우-->
 		<div class="profile-right">
 			<div class="name-group">
-				<h2>${user.name}</h2>
+				<h2>${userProfileDto.user.name}</h2>
 
-				<button class="cta" onclick="location.href='/image/upload'">사진등록</button>
-				<button class="cta" onclick="toggleSubscribe(this)">구독하기</button>
+				<c:choose>
+					<c:when test="${userProfileDto.pageOwnerState}">
+						<button class="cta" onclick="location.href='/image/upload'">사진등록</button>
+					</c:when>
+					<c:otherwise>
+						<button class="cta" onclick="toggleSubscribe(this)">팔로우</button>
+					</c:otherwise>
+				</c:choose>
+
 				<button class="modi" onclick="popup('.modal-info')">
 					<i class="fas fa-cog"></i>
 				</button>
@@ -37,18 +44,18 @@
 
 			<div class="subscribe">
 				<ul>
-					<li><a href=""> 게시물<span>3</span>
+					<li><a href=""> 게시물<span>${userProfileDto.imageCount}</span>
 					</a></li>
-					<li><a href="javascript:subscribeInfoModalOpen();"> 구독정보<span>2</span>
+					<li><a href="javascript:subscribeInfoModalOpen();"> 팔로우<span>2</span>
 					</a></li>
 				</ul>
 			</div>
 			<div class="state">
-				<h4>${user.bio}</h4>
-				<h4>${user.website}</h4>
+				<h4>${userProfileDto.user.bio}</h4>
+				<h4>${userProfileDto.user.website}</h4>
 			</div>
 		</div>
-		<!--유저정보 및 사진등록 구독하기-->
+		<!--유저정보 및 사진등록 팔로우-->
 
 	</div>
 </section>
@@ -63,7 +70,7 @@
 			<div class="tab-1-content-inner">
 
 				<!--아이템들-->
-				<c:forEach var="image" items="${user.images}">
+				<c:forEach var="image" items="${userProfileDto.user.images}">
 					<div class="img-box">
 						<a href=""> <img src="/upload/${image.postImageUrl}"/>
 						</a>
@@ -104,7 +111,7 @@
 <div class="modal-subscribe">
 	<div class="subscribe">
 		<div class="subscribe-header">
-			<span>구독정보</span>
+			<span>팔로우정보</span>
 			<button onclick="modalClose()">
 				<i class="fas fa-times"></i>
 			</button>
@@ -120,7 +127,7 @@
 					<h2>love</h2>
 				</div>
 				<div class="subscribe__btn">
-					<button class="cta blue" onclick="toggleSubscribeModal(this)">구독취소</button>
+					<button class="cta blue" onclick="toggleSubscribeModal(this)">팔로우취소</button>
 				</div>
 			</div>
 
@@ -133,7 +140,7 @@
 					<h2>ssar</h2>
 				</div>
 				<div class="subscribe__btn">
-					<button class="cta blue" onclick="toggleSubscribeModal(this)">구독취소</button>
+					<button class="cta blue" onclick="toggleSubscribeModal(this)">팔로우취소</button>
 				</div>
 			</div>
 		</div>
