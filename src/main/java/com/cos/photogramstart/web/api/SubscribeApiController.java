@@ -19,13 +19,13 @@ public class SubscribeApiController {
     private final SubscribeService subscribeService;
 
     @PostMapping("/api/subscribe/{toUserId}")
-    public ResponseEntity<?> subscirbe(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable Long toUserId) {
+    public ResponseEntity<?> subscirbe(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable int toUserId) {
         subscribeService.subscribe(principalDetails.getUser().getId(), toUserId);
         return new ResponseEntity<>(new CustomResponseDto<>(1, "팔로우 성공", null), HttpStatus.OK);
     }
 
     @DeleteMapping("/api/subscribe/{toUserId}")
-    public ResponseEntity<?> unSubscirbe(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable Long toUserId) {
+    public ResponseEntity<?> unSubscirbe(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable int toUserId) {
         subscribeService.unSubscribe(principalDetails.getUser().getId(), toUserId);
         return new ResponseEntity<>(new CustomResponseDto<>(1, "팔로우 취소성공", null), HttpStatus.OK);
     }

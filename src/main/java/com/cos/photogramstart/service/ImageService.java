@@ -21,7 +21,7 @@ public class ImageService {
     @Value("${file.path}")
     private String uploadFolder;
 
-    public void 사진업로드(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) {
+    public void imageUpload(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) {
         UUID uuid = UUID.randomUUID();
         String imageFileName = uuid + "_" + imageUploadDto.getFile().getOriginalFilename();
         Path imageFilePath = Paths.get(uploadFolder + imageFileName);

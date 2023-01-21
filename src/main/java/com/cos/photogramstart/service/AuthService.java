@@ -15,7 +15,7 @@ public class AuthService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Transactional
-    public User 회원가입(User user) {
+    public User signupProgress(User user) {
         String rawPassword = user.getPassword();
         String encPassword = passwordEncoder.encode(rawPassword);
         user.setPassword(encPassword);

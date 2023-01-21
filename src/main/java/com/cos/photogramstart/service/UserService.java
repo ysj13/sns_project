@@ -1,5 +1,6 @@
 package com.cos.photogramstart.service;
 
+import com.cos.photogramstart.domain.subscribe.SubscribeRepository;
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
 import com.cos.photogramstart.handler.ex.CustomException;
@@ -15,10 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final SubscribeRepository subscribeRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional(readOnly = true)
-    public UserProfileDto 회원프로필(Long pageUserId, Long principalId) {
+    public UserProfileDto userProfile(int pageUserId, int principalId) {
         UserProfileDto userProfileDto = new UserProfileDto();
 
         User userEntity = userRepository.findById(pageUserId).orElseThrow(() -> {
@@ -29,11 +31,18 @@ public class UserService {
         userProfileDto.setPageOwnerState(pageUserId == principalId);
         userProfileDto.setImageCount(userEntity.getImages().size());
 
+        // 구독상태
+        int subscribeState = subscribeRepository.nSubscribeState(principalId, pageUserId);
+        int subscribeCount = subscribeRepository.nSubscribeCount(pageUserId);
+
+        userProfileDto.setSubscribeState(subscribeState == 1);
+        userProfileDto.setSubscribeCount(subscribeCount);
+
         return userProfileDto;
     }
 
     @Transactional
-    public User 회원수정(Long id, User user) {
+    public User editUser(int id, User user) {
         User userEntity = userRepository.findById(id).orElseThrow(() -> new CustomValidationApiException("찾을 수 없는 아이디 입니다"));
 
         String encPassword = bCryptPasswordEncoder.encode(user.getPassword());

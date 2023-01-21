@@ -38,7 +38,7 @@ public class ImageController {
             throw new CustomValidationException("이미지가 첨부되지 않았습니다", null);
         }
 
-        imageService.사진업로드(imageUploadDto, principalDetails);
+        imageService.imageUpload(imageUploadDto, principalDetails);
         return "redirect:/user/" + principalDetails.getUser().getId();
     }
 }
