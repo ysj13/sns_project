@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -56,5 +57,14 @@ public class UserApiController {
             principalDetails.setUser(userEntity);
             return new CustomResponseDto<>(1, "회원 수정 완료", userEntity);
         }
+    }
+
+    @PutMapping("/api/user/{principalId}/profileImageUrl")
+    public ResponseEntity<?> profileImageUrlUpdate(@PathVariable int principalId, MultipartFile profileImageFile,
+                                                   @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        User userEntity = userService.profileImageUpdate(principalId, profileImageFile);
+        principalDetails.setUser(userEntity);
+        return new ResponseEntity<>(new CustomResponseDto<>(1, "프로필사진변경성공", null), HttpStatus.OK);
+
     }
 }
