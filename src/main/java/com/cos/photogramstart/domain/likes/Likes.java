@@ -45,5 +45,4 @@ public class Likes {
     public void createDate() {
         this.createDate = LocalDateTime.now();
     }
-
 }

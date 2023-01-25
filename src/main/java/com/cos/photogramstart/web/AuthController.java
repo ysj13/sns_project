@@ -37,7 +37,6 @@ public class AuthController {
 
     @PostMapping("/auth/signup")
     public String signup(@Valid SignupDto signupDto, BindingResult bindingResult) {
-
         if(bindingResult.hasErrors()) {
             Map<String, String> errorMap = new HashMap<>();
 
