@@ -2,7 +2,7 @@ package com.cos.photogramstart.web.api;
 
 import com.cos.photogramstart.config.auth.PrincipalDetails;
 import com.cos.photogramstart.service.SubscribeService;
-import com.cos.photogramstart.web.dto.CustomResponseDto;
+import com.cos.photogramstart.web.dto.comment.CustomResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

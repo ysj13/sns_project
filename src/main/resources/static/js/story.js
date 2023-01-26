@@ -179,7 +179,7 @@ function addComment(imageId) {
 		`;
 		commentList.prepend(content);
 	}).fail(error => {
-		console.log("실패", error);
+		alert(error.responseJSON.data.content);
 	});
 
 	commentInput.val("");

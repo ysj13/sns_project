@@ -1,4 +1,4 @@
-package com.cos.photogramstart.web.api;
+package com.cos.photogramstart.web.dto.user;
 
 import com.cos.photogramstart.domain.user.User;
 import lombok.Data;

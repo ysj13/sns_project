@@ -4,7 +4,7 @@ import com.cos.photogramstart.config.auth.PrincipalDetails;
 import com.cos.photogramstart.domain.image.Image;
 import com.cos.photogramstart.service.ImageService;
 import com.cos.photogramstart.service.LikesService;
-import com.cos.photogramstart.web.dto.CustomResponseDto;
+import com.cos.photogramstart.web.dto.comment.CustomResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

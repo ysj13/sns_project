@@ -44,7 +44,7 @@ public class Image {
     private int likeCount;
 
     // 댓글
-    @OrderBy("id desc")
+    @OrderBy("createDate asc")
     @JsonIgnoreProperties({"image"})
     @OneToMany(mappedBy = "image")
     private List<Comment> comments;
