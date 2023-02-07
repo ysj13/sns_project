@@ -19,13 +19,15 @@ import java.util.UUID;
 public class OAuth2DetailsService extends DefaultOAuth2UserService {
 
     private final UserRepository userRepository;
+    private static final String FACEBOOK_PREFIX = "facebook_";
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
         Map<String, Object> userInfo = oAuth2User.getAttributes();
-        String username = "google_" + userInfo.get("id");
+
+        String username = FACEBOOK_PREFIX + userInfo.get("id");
         String password = new BCryptPasswordEncoder().encode(UUID.randomUUID().toString());
         String name = (String) userInfo.get("name");
         String email = (String) userInfo.get("email");
