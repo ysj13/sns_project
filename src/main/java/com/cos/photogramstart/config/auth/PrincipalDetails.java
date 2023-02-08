@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 
 @Data
 public class PrincipalDetails implements UserDetails, OAuth2User {
@@ -23,6 +24,14 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     }
 
     public PrincipalDetails(User user, Map<String, Object> attributes) {
+        this.user = user;
+    }
+
+    public PrincipalDetails(Optional<User> userEntity, Map<String, Object> attributes) {
+        this.user = user;
+    }
+
+    public PrincipalDetails(Optional<User> byUsername) {
         this.user = user;
     }
 

@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -32,20 +33,19 @@ public class OAuth2DetailsService extends DefaultOAuth2UserService {
         String name = (String) userInfo.get("name");
         String email = (String) userInfo.get("email");
 
-        User userEntity = userRepository.findByUsername(username);
+        Optional<User> userEntity = userRepository.findByUsername(username);
 
-        if(userEntity == null) {
-            User user = User.builder()
-                    .username(username)
-                    .password(password)
-                    .email(email)
-                    .name(name)
-                    .role("ROLE_USER")
-                    .build();
+        return userRepository.findByUsername(username)
+                .map(user -> new PrincipalDetails(userEntity, oAuth2User.getAttributes()))
+                .orElseGet(() -> {
+                    User user = User.builder().username(username)
+                            .password(password)
+                            .email(email)
+                            .name(name)
+                            .role("ROLE_USER")
+                            .build();
 
-            return new PrincipalDetails(userRepository.save(user), oAuth2User.getAttributes());
-        } else {
-            return new PrincipalDetails(userEntity, oAuth2User.getAttributes());
-        }
+                    return new PrincipalDetails(userRepository.save(user), oAuth2User.getAttributes());
+                });
     }
 }
